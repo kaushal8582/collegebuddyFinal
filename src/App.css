@@ -1,0 +1,18 @@
+.socialmedia:hover .svg-path {
+    fill: white; /* Change to your desired hover color */
+  }
+
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbars for Firefox */
+  .scrollbar-hide {
+    scrollbar-width: none; /* For Firefox */
+  }
+  
+  /* Hide scrollbars for Edge, IE */
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  }

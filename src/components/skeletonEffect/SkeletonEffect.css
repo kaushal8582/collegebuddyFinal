@@ -1,0 +1,30 @@
+.ad-card{
+    overflow: hidden;
+    border-radius: 20px;
+}
+.ad-card::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 400%;
+    width: 20px;
+    background: rgb(255, 255, 255);
+    -webkit-box-shadow: 31px -22px 87px 0px rgba(255,255,255,1);
+    -moz-box-shadow: 31px -22px 87px 0px rgba(255,255,255,1);
+    box-shadow: 31px -22px 87px 0px rgba(255,255,255,1);
+    opacity: 1;
+    transition: 0.45;
+    transform: rotate(-20deg) translate(-100px,20px);
+    animation: animate 6s ease-in-out infinite ;
+}
+
+@keyframes animate {
+    0%{
+        transform: rotate(-20deg) translate(-100px,-10px);
+    }
+    
+    100%{
+        transform: rotate(-20deg) translate(1200px,100px);
+    }
+}

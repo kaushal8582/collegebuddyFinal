@@ -1,0 +1,7 @@
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="sort-list-button">
+<rect width="30" height="30" rx="10" fill="white"/>
+<rect x="0.5" y="0.5" width="29" height="29" rx="9.5" stroke="#1E1E1E" stroke-opacity="0.25"/>
+<path id="Vector" d="M11 23V13M11 23L8 20M11 23L14 20M19 7V17M19 7L22 10M19 7L16 10" stroke="#1E1E1E" stroke-opacity="0.75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
