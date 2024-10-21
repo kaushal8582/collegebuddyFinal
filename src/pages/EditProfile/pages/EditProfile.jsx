@@ -17,6 +17,12 @@ const EditProfile = () => {
   const [userBasicDetails, setUSerBasicDetails] = useState({});
   const context = useContext(myContext);
   const { fetchProfileData, profileData, loader, setLoader } = context;
+  const [error,setError] = useState({
+    name:"",
+    bg:"",
+    text:"",
+    type:""
+  });
 
   const navigate = useNavigate();
   const data = JSON.parse(localStorage.getItem("user"));
@@ -25,7 +31,6 @@ const EditProfile = () => {
     const startingFunction = async () => {
       setEditPage(true);
       setUSerBasicDetails(data.data);
-   
 
       if (data?.data?.createdProfile) {
         await fetchProfileData();
@@ -58,16 +63,58 @@ const EditProfile = () => {
     bio: "",
   });
 
-  const handleUserNameChange = (e) => {
+  const handleUserNameChange = async (e) => {
     let value = e.target.value;
-    let noSpaceValue = value.replace(/\s+/g, '');
+    let noSpaceValue = value.replace(/\s+/g, "");
     setUSerData((prevData) => ({
-      ...prevData, 
-      username: noSpaceValue, 
+      ...prevData,
+      username: noSpaceValue,
     }));
+
+    if(userData.username.length<=2){
+      setError({
+        name:"UserName minimum 3 Character",
+        text:"text-red-500",
+        type:"username"
+      })
+      return
+    }
+
+    try {
+      const datavalue = JSON.parse(localStorage.getItem("user"));
+      const accessToken = datavalue?.accessToken;
+
+      const response = await fetch(`${BASE_URL}/collegebuddy/api/v1/profile/checkusername`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body:JSON.stringify({userName:userData.username})
+      });
+
+      if(response.ok){
+        console.log("UserName is avilable");
+        setError({
+          name:"UserName is avilable",
+          text:"text-blue-500",
+          type:"username"
+        })
+      }else{
+        console.log("Usename is not avilable");
+        setError({
+          name:"UserName is not avilable",
+          text:"text-red-500",
+          type:"username"
+        })
+        
+      }
+
+
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-
 
   const handelImageUpload = (e) => {
     const file = e.target.files[0];
@@ -121,10 +168,10 @@ const EditProfile = () => {
     setLinks([...links, { platform: "", url: "" }]);
   };
 
-  const removeLink = (index)=>{
-    const newLink = links.filter((_,i)=> i!=index);
-    setLinks(newLink)
-  }
+  const removeLink = (index) => {
+    const newLink = links.filter((_, i) => i != index);
+    setLinks(newLink);
+  };
 
   // Function to handle link input changes
   const handleLinkChange = (index, event) => {
@@ -132,7 +179,7 @@ const EditProfile = () => {
       i === index ? { ...link, [event.target.name]: event.target.value } : link
     );
     console.log(updatedLinks);
-    
+
     setLinks(updatedLinks);
   };
 
@@ -151,10 +198,10 @@ const EditProfile = () => {
     ]);
   };
 
-  const removeEducation = (index)=>{
-    const newEducation = education.filter((_,i)=> i!=index);
-    setEducation(newEducation)
-  }
+  const removeEducation = (index) => {
+    const newEducation = education.filter((_, i) => i != index);
+    setEducation(newEducation);
+  };
 
   // Function to handle education input changes
   const handleEducationChange = (index, event) => {
@@ -436,7 +483,11 @@ const EditProfile = () => {
                   className="w-64 max-md-xs:w-[180px] outline-none border-2 rounded-lg pl-3"
                   type="text"
                 />
+               
+                
               </div>
+             {error.type=="username" &&  <p className={`text-center ${error.text} bg-white`} >{error.name}</p>}
+              
               <div className="pl-24 max-md-xs:pl-4 flex items-center  ">
                 <h2 className="w-28 max-md-xs:w-[25%]">Gender</h2>
                 <div className="w-64 max-md-xs:w-[180px] flex items-center gap-4 ">
@@ -822,7 +873,7 @@ const EditProfile = () => {
                     value={edu.subject}
                     onChange={(event) => handleEducationChange(index, event)}
                   />
-                  
+
                   <input
                     className="w-[80px] pl-3 outline-none border-2 rounded-lg"
                     type="number"
@@ -831,7 +882,7 @@ const EditProfile = () => {
                     value={edu.marks}
                     onChange={(event) => handleEducationChange(index, event)}
                   />
-                    <svg
+                  <svg
                     onClick={() => removeEducation(index)}
                     className="ml-2 cursor-pointer"
                     fill="#ff0000"
@@ -873,8 +924,6 @@ const EditProfile = () => {
                       </g>{" "}
                     </g>
                   </svg>
-
-                
                 </div>
               ))}
             </div>
@@ -901,12 +950,11 @@ const EditProfile = () => {
             <div className="flex flex-col gap-3 mt-3 pl-24 max-md-xs:pl-4 max-md-xs:pr-4 pr-24">
               {links.map((link, index) => (
                 <div className="flex items-center justify-between" key={index}>
-                  
                   <select
-                  onChange={(event) => handleLinkChange(index, event)}
-                  className="w-[30%] outline-none border-2 rounded-xl pl-3" 
-                  value={link.platform}
-                  name="platform"
+                    onChange={(event) => handleLinkChange(index, event)}
+                    className="w-[30%] outline-none border-2 rounded-xl pl-3"
+                    value={link.platform}
+                    name="platform"
                   >
                     <option value="">Select Socail Media</option>
                     <option value="Instagram">Instagram</option>

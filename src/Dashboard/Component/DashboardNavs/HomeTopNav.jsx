@@ -89,7 +89,7 @@ const HomeTopNav = ({ opneLeftNavFun, currPage,localData }) => {
         )}
       </div>
       <div className="flex items-center justify-center gap-5">
-        { (currPage == "saved" || currPage=="ebooks" ) && (
+        { (currPage == "saved"  ) && (
           <div className="h-12 border-2 w-[25vw] rounded-full overflow-hidden flex justify-between">
             <input
               className="w-[88%] h-full rounded-full pl-4 outline-none "

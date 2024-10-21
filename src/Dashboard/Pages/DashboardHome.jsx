@@ -48,7 +48,7 @@ const DashboardHome = () => {
   return (
     <div className=" w-full relative h-full ">
       {loader && (
-        <div className="w-full h-full bg-[#ffffff] top-0 left-0  z-50 absolute flex items-center justify-center">
+        <div className="w-full h-screen  bg-[#ffffff] top-0 left-0  z-50 absolute flex items-center justify-center">
           <SkeletonEffectCard/>
         </div>
       )}
@@ -67,7 +67,7 @@ const DashboardHome = () => {
       {currPage == "dashboard" && <DashboardCom localData={LocalStorageData} />}
       {currPage == "saved" && <SavedMaterial />}
       {currPage == "pyqs" && <PyqPage />}
-      {currPage == "ebooks" && <CommingSoon />}
+      {currPage == "ebooks" && <EbookPage />}
       {currPage == "videos" && <VideoPage />}
       {currPage == "notes" && <CommingSoon />}
       {currPage == "courses" && <CommingSoon />}
