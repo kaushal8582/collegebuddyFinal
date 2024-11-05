@@ -15,9 +15,8 @@ const myState = (props) => {
   const [allCourseName, setAllCourseName] = useState([]);
   const [getAllVideo, setAllVideo] = useState();
   const [getAllTeam, setAllTeam] = useState();
-  const [profileData,setProfileData] = useState({})
-
-  
+  const [profileData, setProfileData] = useState({});
+  const [savedDataValue,setSavedData] = useState([])
 
   useEffect(() => {
     const getAllEbooks = async () => {
@@ -189,52 +188,55 @@ const myState = (props) => {
 
   const fetchProfileData = async () => {
     try {
-      setLoader(true)
+      setLoader(true);
       const datavalue = JSON.parse(localStorage.getItem("user"));
       const accessToken = datavalue?.accessToken;
-      if(!datavalue.data){
-        navigate("/login")
+      if (!datavalue.data) {
+        navigate("/login");
       }
 
-      const response = await fetch(`${BASE_URL}/collegebuddy/api/v1/profile/getprofiledetails/${datavalue.data._id}`,{
-        method:"GET",
-        headers: { 
-        Authorization: `Bearer ${accessToken}`,
+      const response = await fetch(
+        `${BASE_URL}/collegebuddy/api/v1/profile/getprofiledetails/${datavalue.data._id}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
         }
-      })
-
+      );
 
       if (!response.ok) {
         // Log the status and error message
         const errorMessage = await response.text();
-        console.error("Error fetching profile data:", response.status, errorMessage);
+        console.error(
+          "Error fetching profile data:",
+          response.status,
+          errorMessage
+        );
         return;
       }
 
-      const data = await response.json()
+      const data = await response.json();
       setProfileData(data.data);
     } catch (error) {
       console.log(error);
-    }finally{
+    } finally {
       setLoader(false);
     }
   };
 
-  useEffect(()=>{
-    fetchProfileData()
-  },[])
+  useEffect(() => {
+    fetchProfileData();
+  }, []);
 
-
-  const handleShare = async (username,name,password) => {  
+  const handleShare = async (username, name, password) => {
     const shareUrl = `https://collegebuddytesting.netlify.app/profile/@${username}?p=${password}`;
 
     if (navigator.share) {
       try {
         await navigator.share({
           title: `Check out my Profile!`,
-          text: `Check out the profile of ${
-           name
-          } on CollegeBuddy!`,
+          text: `Check out the profile of ${name} on CollegeBuddy!`,
           url: shareUrl,
         });
         console.log("Profile shared successfully");
@@ -248,7 +250,66 @@ const myState = (props) => {
     }
   };
 
+  const savedData = async (userID, itemId, itemType, itemDetils) => {
+    try {
+      const datavalue = JSON.parse(localStorage.getItem("user"));
+      const accessToken = datavalue?.accessToken;
+      console.log(accessToken);
 
+      const response = await fetch(
+        `${BASE_URL}/collegebuddy/api/v1/saved/saved-item`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify({
+            userId: userID,
+            itemId: itemId,
+            itemType: itemType,
+            itemDetails: itemDetils,
+          }),
+        }
+      );
+
+      if(response.status==409){
+        toast.error(`${itemType } already exists!`)
+        return;
+      }
+
+      if (response.ok) {
+        toast.success("Saved Data successfully ");
+        return;
+      }
+    } catch (error) {
+      console.log(`${itemType} saved error`);
+    }
+  };
+
+  const getAllSavedContent = async (userId) => {
+    try {
+      const datavalue = JSON.parse(localStorage.getItem("user"));
+      const accessToken = datavalue?.accessToken;
+      const response =  await fetch(
+        `${BASE_URL}/collegebuddy/api/v1/saved/get-all-saved-data/${userId}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      if(response.ok){
+        const data = await response.json();
+        setSavedData(data?.data)
+      }
+
+    } catch (error) {
+      console.log("fetching saved data error");
+    }
+  };
 
   return (
     <myContext.Provider
@@ -270,7 +331,10 @@ const myState = (props) => {
         fetchProfileData,
         profileData,
         setProfileData,
-        handleShare
+        handleShare,
+        savedData,
+        getAllSavedContent,
+        savedDataValue
       }}
     >
       {props.children}

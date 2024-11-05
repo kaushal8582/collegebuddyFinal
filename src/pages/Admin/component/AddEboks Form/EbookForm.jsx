@@ -95,16 +95,26 @@ const EbookForm = () => {
         </div>
         <div className="mb-4 w-full">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-            Description
+            Categories
           </label>
-          <textarea
+          {/* <textarea
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="description"
             name='description'
             placeholder="Description"
             value={formData.description}
             onChange={handelInputChange}
-          />
+          /> */}
+          <select name="description" id="" value={formData.description} onChange={handelInputChange} className='w-full border-2 text-gray-600 h-10' >
+            <option value="HTML">HTML</option>
+            <option value="CSS">CSS</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="Python">Python</option>
+            <option value="Java">Java</option>
+            <option value="C++">C++</option>
+            <option value="SQL">SQL</option>
+            <option value="DBMS">DBMS</option>
+          </select>
         </div>
         <div className="mb-4 w-full">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="thumbnail">

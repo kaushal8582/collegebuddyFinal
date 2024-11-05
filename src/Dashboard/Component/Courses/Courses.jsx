@@ -8,7 +8,7 @@ const Courses = ({ img, heading, desc, time, mentor, level,redirectLink }) => {
   return (
     <a href={redirectLink} target="_blank" >
       <div className="p-[15px] min-w-[340px] max-w-[340px] max-md-xs:min-w-[70vw] h-[244px] rounded-xl border overflow-hidden ">
-        <img className="rounded-xl" src={img} alt="courseBanner" />
+        <img className="rounded-xl h-[124px] w-[308px] " src={img} alt="courseBanner" />
         <h2 className="text-[20px]">{heading}</h2>
         <p className="text-[12px] text-[#1E1E1E80]">{desc}</p>
         <div className="flex items-center h-8 justify-between border-dashed border-2 w-full rounded-lg p-2">

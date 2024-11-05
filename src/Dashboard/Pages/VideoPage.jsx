@@ -50,7 +50,7 @@ const VideoPage = () => {
         <div className="flex gap-3 max-md-xs:pl-0 pl-[100px] pt-[30px] flex-wrap" >
         {getAllVideo?.length > 0 ? (
         getAllVideo.map((item) => (
-          <VideoCardComponent heading={item.title} url={item.videoLink} />
+          <VideoCardComponent heading={item.title} url={item.videoLink} videoId={item._id}  key={item._id} />
         ))
       ) : (
         <h1>Not have any video, sorry 🤔🤩🤗</h1>

@@ -3,7 +3,7 @@ import "./SkeletonEffect.css"
 
 const SkeletonEffectCard = () => {
   return (
-    <div className='w-full h-screen bg-white p-4 overflow-hidden flex gap-3 flex-col ' >
+    <div className='w-full absolute top-0 left-0 z-30 h-screen bg-white p-4 overflow-hidden flex gap-3 flex-col ' >
         <div className='w-full h-[65vh]  flex justify-between  ' >
             <div className='w-[65%] h-full  flex flex-col items-center justify-between ' >
                 <div className='ad-card relative w-full h-[48%] bg-[#4e4e4e7e]'></div>

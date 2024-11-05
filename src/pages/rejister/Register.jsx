@@ -226,8 +226,8 @@ const Register = () => {
 
             <select name="college" value={user.college} onChange={handleChange}>
               <option value="null">Select your university or college</option>
-              {allUniversityname.map((item)=>(
-                <option value={item.name}>
+              {allUniversityname.map((item,index)=>(
+                <option key={index} value={item.name}>
                 {item.name}
               </option>
               ))}
@@ -235,8 +235,8 @@ const Register = () => {
             </select>
             <select name="course" value={user.course} onChange={handleChange}>
               <option value="null">What is your course?</option>
-              {allCourseName.map((item)=>(
-                <option value={item.name}>
+              {allCourseName.map((item ,index)=>(
+                <option key={index} value={item.name}>
                 {item.name}
               </option>
               ))}

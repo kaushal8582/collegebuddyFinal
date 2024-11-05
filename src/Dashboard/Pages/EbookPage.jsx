@@ -6,7 +6,7 @@ import bookImg from "../../assets/College Buddy Website/Frame 190.svg";
 
 const EbookPage = () => {
   const context = useContext(myContext);
-  const { loader, setLoader } = context;
+  const { loader,allEbook } = context;
   const [activeButton, setActiveButton] = useState("all");
   const [filterData, setFilterData] = useState([]);
 
@@ -16,9 +16,11 @@ const EbookPage = () => {
     "CSS",
     "JavaScript",
     "Python",
+    "SQL",
     "Web projects",
     "Java",
     "C++",
+    "DBMS"
   ];
 
   let EbookData = [
@@ -64,15 +66,13 @@ const EbookPage = () => {
     if (button == "all") {
       setFilterData(EbookData);
     } else {
-      let filtData = EbookData.filter((data) => data.categories == button);
+      let filtData = allEbook.filter((data) => data?.description == button);      
       setFilterData(filtData);
     }
     setActiveButton(button);
   };
 
-  useEffect(() => {
-    console.log(filterData);
-  }, [filterData]);
+ 
 
   return (
     <div className=" max-lg-xs:pl-0  h-screen overflow-y-auto bg-gray-300 ">
@@ -106,7 +106,7 @@ const EbookPage = () => {
               College Buddy <br /> E-BookStore
             </h1>
             <p className="text-[20px] text-[#1E1E1EBF] ">
-              Books to excel in techand acedemics
+              Books to excel in tech and acedemics
             </p>
           </div>
         </div>
@@ -116,17 +116,19 @@ const EbookPage = () => {
             ? filterData.map((ebook, index) => (
                 <EbookCard
                   key={index}
-                  img={bookImg}
+                  img={ebook.thumbnail}
                   title={ebook.title}
-                  url={ebook.url}
+                  url={ebook.ebookLink}
+                  id={ebook._id}
                 />
               ))
-            : EbookData.map((ebook, index) => (
+            : allEbook.map((ebook, index) => (
                 <EbookCard
                   key={index}
-                  img={bookImg}
+                  img={ebook.thumbnail}
                   title={ebook.title}
-                  url={ebook.url}
+                  url={ebook.ebookLink}
+                  id={ebook._id}
                 />
               ))}
         </div>

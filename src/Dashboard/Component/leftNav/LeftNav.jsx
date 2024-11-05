@@ -76,9 +76,9 @@ const LeftNav = ({ opneLeftNav, closeLeftNavFun, setCurrPage }) => {
     { name: "ebooks", icon: Ebook, label: "E-Books" },
     { name: "videos", icon: youtubeVideo, label: "Videos" },
     { name: "notes", icon: noteesIcon, label: "Notes" },
-    { name: "courses", icon: courseIcon, label: "Courses" },
-    { name: "live", icon: liveVideo, label: "Live Classes" },
-    { name: "help", icon: helpIcon, label: "Help & Support" },
+    // { name: "courses", icon: courseIcon, label: "Courses" },
+    // { name: "live", icon: liveVideo, label: "Live Classes" },
+    // { name: "help", icon: helpIcon, label: "Help & Support" },
     {
       name: "logout",
       icon: logoutIcon,
@@ -109,6 +109,11 @@ const LeftNav = ({ opneLeftNav, closeLeftNavFun, setCurrPage }) => {
           alt="arrow"
         />
       </div>
+
+
+      <div className=" flex flex-col  h-screen justify-between">
+
+      
 
       <div className={`w-full flex   flex-col `}>
         <div
@@ -142,7 +147,7 @@ const LeftNav = ({ opneLeftNav, closeLeftNavFun, setCurrPage }) => {
             alt=""
           />
         </div>
-        {menuItems.slice(0, 8).map((item) => (
+        {menuItems.slice(0, 6).map((item) => (
           <div
             key={item.name}
             onClick={() => handleItemClick(item.name)}
@@ -174,7 +179,7 @@ const LeftNav = ({ opneLeftNav, closeLeftNavFun, setCurrPage }) => {
       </div>
 
       <div>
-        {menuItems.slice(8).map((item) => (
+        {menuItems.slice(6).map((item) => (
           <div
             key={item.name}
             onClick={() => handleItemClick(item.name)}
@@ -204,6 +209,7 @@ const LeftNav = ({ opneLeftNav, closeLeftNavFun, setCurrPage }) => {
             )}
           </div>
         ))}
+      </div>
       </div>
     </div>
   );

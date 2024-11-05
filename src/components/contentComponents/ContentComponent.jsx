@@ -16,7 +16,7 @@ const ContentComponent = () => {
         <span className="text-green font-normal">community</span> of college
         students.
       </h1>
-      <a className="cursor-pointer z-10" href="https://chat.whatsapp.com/LpmIxWmdZR5JHxeNMGCgTc">
+      <a className="cursor-pointer z-40" target="_blank" href="https://chat.whatsapp.com/LpmIxWmdZR5JHxeNMGCgTc">
         {" "}
         <div className="watsapp  mt-5 button btn flex items-center justify-center gap-25  md:[40vw] h-16 cursor-pointer">
           <img src={watsapp} alt="" />

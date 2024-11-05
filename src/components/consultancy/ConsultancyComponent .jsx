@@ -19,12 +19,12 @@ const ConsultancyComponent = () => {
             <span className="text-green-500 font-normal">You can contact us anytime!</span>
           </p>
           <div className="buttons flex items-center mt-14 gap-6">
-            <button className="button hoverbtn w-[291px] text-24px capitalize font-normal">
+            <a target='_blank' href="https://wa.me/+919801907094?text=Hello!+I+need+help+with+choosing+the+right+field+for+my+future.+Please+guide+me+with+some+expert+advice!+" ><button className="button hoverbtn w-[291px] text-24px capitalize font-normal">
               send a message <img src={watsappImg} alt="" />
-            </button>
-            <button className="button w-[247px] text-black bg-transparent border-3 border-black text-24px capitalize font-normal">
+            </button></a>
+           <a href="tel:+919801907094" className='button w-[247px]  text-white  border-2 bg-gray-500 border-black text-24px capitalize font-normal' > <button className="button w-[247px]  bg-transparent border-3 border-black text-24px capitalize font-normal">
               talk on call <img src={callImg} alt="" />
-            </button>
+            </button></a>
           </div>
         </div>
         <div className="rightConstulalcy w-2/5 h-full relative overflow-hidden">

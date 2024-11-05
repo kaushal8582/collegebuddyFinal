@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import bannerImg from "../../../assets/resources/img/pyq-banner 1.png";
 import toast from "react-hot-toast";
+import { BASE_URL } from "../../../../Helper";
+import myContext from "../../../components/context/myContext";
 
-const PyqCard = ({collegeName,courseName,sem,session,year,questionLink,id}) => {
+const PyqCard = ({
+  collegeName,
+  courseName,
+  sem,
+  session,
+  year,
+  questionLink,
+  id,
+}) => {
+  const context = useContext(myContext);
+  const { savedData } = context;
 
   const handleDownload = async () => {
     try {
-      toast.success("click");
-
       const datavalue = JSON.parse(localStorage.getItem("user"));
       const accessToken = datavalue?.accessToken;
       const response = await fetch(
-        `http://localhost:3000/collegebuddy/api/v1/pyq/downloadpyq/${id}`,
+        `${BASE_URL}/collegebuddy/api/v1/pyq/downloadpyq/${id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -20,7 +30,6 @@ const PyqCard = ({collegeName,courseName,sem,session,year,questionLink,id}) => {
           method: "POST",
         }
       );
-
 
       if (response.status == 401) {
         navigate("/login");
@@ -32,7 +41,7 @@ const PyqCard = ({collegeName,courseName,sem,session,year,questionLink,id}) => {
 
       const a = document.createElement("a");
       a.href = data.data;
-      a.download = `${ collegeName}-${sem}th - ${year} pyq.pdf`; 
+      a.download = `${collegeName}-${sem}th - ${year} pyq.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -41,7 +50,19 @@ const PyqCard = ({collegeName,courseName,sem,session,year,questionLink,id}) => {
     }
   };
 
+  const handelSavedPyq = async (id) => {
+    const datavalue = JSON.parse(localStorage.getItem("user"));
+    const userId = datavalue?.data._id;
+    let obj ={
+      universityName: collegeName,
+      semester: sem,
+      year: year,
+      courseName: courseName,
+      questionLink: questionLink ,
+    }
 
+    savedData(userId,id,"PYQ",obj)
+  };
 
   return (
     <div className="w-[417px] max-lg-xs:w-[340px] p-4 overflow-hidden flex flex-col gap-4 bg-white rounded-xl ">
@@ -50,26 +71,44 @@ const PyqCard = ({collegeName,courseName,sem,session,year,questionLink,id}) => {
         src={bannerImg}
         alt="college banner"
       />
-      <h1 id="heaingPyqCard" className="text-[1.3vw] font-normal max-lg-xs:text-[2.3vw] ">
-        Babasaheb Bhimrao Ambedkar Bihar University (BRABU)
+      <h1
+        id="heaingPyqCard"
+        className="text-[1.3vw] font-normal max-lg-xs:text-[2.3vw] "
+      >
+        {collegeName}
       </h1>
       <div className="flex flex-wrap gap-2">
-        <h3 id="pyqcardcontent" className="pyqcardcontent w-[48%] h-8 border-2 border-dashed pl-3 text-[1vw]  flex items-center justify-start max-lg-xs:text-[1.7vw] max-md-xs:text-[2.6vw] ">
+        <h3
+          id="pyqcardcontent"
+          className="pyqcardcontent w-[48%] h-8 border-2 border-dashed pl-3 text-[1vw]  flex items-center justify-start max-lg-xs:text-[1.7vw] max-md-xs:text-[2.6vw] "
+        >
           Course : <span>{courseName}</span>
         </h3>
-        <h3  id="pyqcardcontent1" className= " pyqcardcontent w-[48%] h-8 border-2 border-dashed pl-3 3 text-[1vw]   flex items-center justify-start   max-lg-xs:text-[1.7vw] ">
+        <h3
+          id="pyqcardcontent1"
+          className=" pyqcardcontent w-[48%] h-8 border-2 border-dashed pl-3 3 text-[1vw]   flex items-center justify-start   max-lg-xs:text-[1.7vw] "
+        >
           Semester : <span>{sem}th</span>
         </h3>
-        <h3  id="pyqcardcontent2" className=" pyqcardcontent w-[48%] h-8 border-2 border-dashed pl-3 3 text-[1vw]  flex items-center justify-start   max-lg-xs:text-[1.7vw] ">
-          Session : <span>2022-2025</span>
+        <h3
+          id="pyqcardcontent2"
+          className=" pyqcardcontent w-[48%] h-8 border-2 border-dashed pl-3 3 text-[1vw]  flex items-center justify-start   max-lg-xs:text-[1.7vw] "
+        >
+          Session : <span>{year}</span>
         </h3>
-        <h3  id="pyqcardcontent3" className=" pyqcardcontent w-[48%] h-8 border-2 border-dashed pl-3  3 text-[1vw]   flex items-center justify-start  max-lg-xs:text-[1.7vw] ">
+        <h3
+          id="pyqcardcontent3"
+          className=" pyqcardcontent w-[48%] h-8 border-2 border-dashed pl-3  3 text-[1vw]   flex items-center justify-start  max-lg-xs:text-[1.7vw] "
+        >
           Year : <span>{year}</span>
         </h3>
       </div>
 
       <div className="flex items-center justify-between w-full">
-        <button onClick={handleDownload} className=" w-[48%] bg-[#79B058] text-white py-2 flex items-center justify-center rounded-xl ">
+        <button
+          onClick={handleDownload}
+          className=" w-[48%] bg-[#79B058] text-white py-2 flex items-center justify-center rounded-xl "
+        >
           <svg
             width="24"
             height="24"
@@ -88,7 +127,10 @@ const PyqCard = ({collegeName,courseName,sem,session,year,questionLink,id}) => {
 
           <h3>Download</h3>
         </button>
-        <button className=" w-[48%]  border-2 py-2 flex items-center justify-center rounded-xl ">
+        <button
+          onClick={() => handelSavedPyq(id)}
+          className=" w-[48%]  border-2 py-2 flex items-center justify-center rounded-xl "
+        >
           <svg
             width="24"
             height="24"

@@ -57,7 +57,7 @@ const PyqPage = () => {
       }
 
       const data = await response.json();
-      console.log(data.data);
+      
       setFindedPyq(data.data);
 
       toast.success("Questio find successfully");
@@ -69,6 +69,9 @@ const PyqPage = () => {
       setLoader(false);
     }
   };
+
+
+ 
 
   return (
     <div className="pl-[100px] max-lg-xs:pl-6 p-8 h-[1080px] overflow-y-auto bg-gray-300 ">
@@ -88,7 +91,7 @@ const PyqPage = () => {
           >
             <option value="">University</option>
             {allUniversityname.map((item) => (
-              <option value={item.name}>{item.name}</option>
+              <option key={item._id} value={item.name}>{item.name}</option>
             ))}
           </select>
           <select
@@ -100,7 +103,7 @@ const PyqPage = () => {
           >
             <option value="null">Course</option>
             {allCourseName.map((item) => (
-              <option value={item.name}>{item.name}</option>
+              <option key={item._id} value={item.name}>{item.name}</option>
             ))}
           </select>
           <select
@@ -152,7 +155,7 @@ const PyqPage = () => {
         {findedPyq.length <= 0
           ? allPyq.map((pyq, index) => {
               return (
-                <div>
+                <div key={index}>
                   <PyqCard
                     key={index}
                     courseName={pyq.courseName}
@@ -167,7 +170,7 @@ const PyqPage = () => {
             })
           : findedPyq.map((pyq, index) => {
               return (
-                <div>
+                <div key={index} >
                   <PyqCard
                     key={index}
                     courseName={pyq.courseName}

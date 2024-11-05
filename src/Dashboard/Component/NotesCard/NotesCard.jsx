@@ -1,24 +1,22 @@
-import React, { useContext } from "react";
-import bookImg from "../../../assets/College Buddy Website/Frame 190.svg";
-import { BASE_URL } from "../../../../Helper";
-import toast from "react-hot-toast";
+import { useContext, useEffect } from "react";
 import myContext from "../../../components/context/myContext";
 
-const EbookCard = ({ title, url, img, id }) => {
+const NotesCard = ({ title, img, categories, url, id }) => {
   const context = useContext(myContext);
   const { savedData } = context;
 
-  const handelEbookSaved = async (id) => {
+  const handelEbookSaved = (id) => {
     const datavalue = JSON.parse(localStorage.getItem("user"));
     const userId = datavalue?.data._id;
     let obj = {
       title,
-      url,
       img,
-      id,
+      categories,
+      url,
+      id
     };
 
-    savedData(userId, id, "E-Book", obj);
+    savedData(userId, id, "NOTES", obj);
   };
 
   return (
@@ -34,12 +32,14 @@ const EbookCard = ({ title, url, img, id }) => {
         </div>
       </div>
       <h3 className="text-[#1E1E1EBF] text-[12px]">
-        Price <br /> <span className="text-[20px] text-[#1E1E1E]">Free</span>
+        {categories} <br />
       </h3>
       <div className="flex items-center justify-between mt-2">
-        <button className="bg-[#79B058]  text-white font-bold py-2 px-4 w-[48%] rounded focus:outline-none focus:shadow-outline">
-          Download
-        </button>
+        <a href={url} className="w-[48%]" target="_blank">
+          <button className="bg-[#79B058]  text-white font-bold py-2 px-4 w-[100%] rounded focus:outline-none focus:shadow-outline">
+            Download
+          </button>
+        </a>
         <button
           onClick={() => handelEbookSaved(id)}
           className="border  text-[#1E1E1EBF] border-[#1E1E1E40] font-bold py-2 px-4 w-[48%]  rounded focus:outline-none focus:shadow-outline ml-4"
@@ -51,4 +51,4 @@ const EbookCard = ({ title, url, img, id }) => {
   );
 };
 
-export default EbookCard;
+export default NotesCard;

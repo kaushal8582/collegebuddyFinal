@@ -21,12 +21,12 @@ const NavProfile = ({ localData }) => {
   };
   return (
     <div className=" flex items-center cursor-pointer justify-center gap-8 max-md-xs:gap-1 h-[48px] rounded-full">
-      <div
+      {/* <div
         onClick={handelNotificaionClick}
         className="h-[48px] w-[48px] max-md-xs:w-[35px] max-md-xs:h-[35px] rounded-full grid place-items-center border-2"
       >
         <img src={notification} alt="notification section" />
-      </div>
+      </div> */}
       <div
         onClick={handelViewProfil}
         className="h-full border-2 flex items-center justify-center px-3 gap-3 max-md-xs:px-1 max-md-xs:py-1 rounded-full"

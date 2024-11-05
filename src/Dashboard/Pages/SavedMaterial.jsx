@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from "react";
+import PyqCard from "../Component/PyqCard/PyqCard";
+import myContext from "../../components/context/myContext";
+import VideoCardComponent from "../Component/VideoCardComponent/VideoCardComponent";
+import EbookCard from "../Component/Ebook/EbookCard";
+import NotesCard from "../Component/NotesCard/NotesCard";
 
 const SavedMaterial = () => {
-  const [activeButton, setActiveButton] = useState('all');
+  const context = useContext(myContext);
+  const { getAllSavedContent, savedDataValue } = context;
 
-  const buttons = ['all', 'PYQ', 'E-Books', 'Videos', 'Courses', 'Live Classes', 'Projects'];
+  const [activeButton, setActiveButton] = useState("PYQ");
+
+  const buttons = ["PYQ", "E-Books", "Videos", "Notes"];
 
   const handleClick = (button) => {
     setActiveButton(button);
   };
+
+  useEffect(() => {
+    const datavalue = JSON.parse(localStorage.getItem("user"));
+    const userId = datavalue?.data._id;
+    getAllSavedContent(userId);
+  }, []);
+
+
 
   return (
     <div>
@@ -17,8 +33,8 @@ const SavedMaterial = () => {
             key={index}
             className={`border-2 p-1 px-5 rounded-3xl  text-nowrap ${
               activeButton === button
-                ? 'bg-[#79B05833] text-[#1E5000] border-[#1E5000]'
-                : ''
+                ? "bg-[#79B05833] text-[#1E5000] border-[#1E5000]"
+                : ""
             }`}
             onClick={() => handleClick(button)}
           >
@@ -26,6 +42,79 @@ const SavedMaterial = () => {
           </button>
         ))}
       </div>
+
+      {activeButton == "PYQ" ? (
+        <div className="pl-[100px] mt-5 max-md-xs:pl-2 flex gap-4 items-center justify-start  max-md-xs:justify-center flex-wrap">
+          {savedDataValue
+            .filter((item) => item.itemType == "PYQ")
+            .map((item, index) => (
+              <PyqCard
+                key={index}
+                year={item.itemDetails.year}
+                collegeName={item.itemDetails.universityName}
+                courseName={item.itemDetails.courseName}
+                questionLink={item.itemDetails.questionLink}
+                sem={item.itemDetails.semester}
+              />
+            ))}
+        </div>
+      ) : (
+        ""
+      )}
+
+      {activeButton == "Videos" ? (
+        <div className="pl-[100px] mt-5 max-md-xs:pl-2 flex gap-4 items-center justify-start  max-md-xs:justify-center flex-wrap">
+          {savedDataValue
+            .filter((item) => item.itemType == "VIDEO")
+            .map((item, index) => (
+              <VideoCardComponent
+                key={index}
+                heading={item.itemDetails.heading}
+                url={item.itemDetails.url}
+                videoId={item.itemDetails.id}
+              />
+            ))}
+        </div>
+      ) : (
+        ""
+      )}
+
+      {activeButton == "E-Books" ? (
+        <div className="pl-[100px] mt-5 max-md-xs:pl-2 flex gap-4 items-center justify-start  max-md-xs:justify-center flex-wrap">
+          {savedDataValue
+            .filter((item) => item.itemType == "E-Book")
+            .map((item, index) => (
+              <EbookCard
+                key={index}
+                id={item.itemDetails.id}
+                img={item.itemDetails.img}
+                title={item.itemDetails.title}
+                url={item.itemDetails.url}
+              />
+            ))}
+        </div>
+      ) : (
+        ""
+      )}
+
+      {activeButton == "Notes" ? (
+        <div className="pl-[100px] mt-5 max-md-xs:pl-2 flex gap-4 items-center justify-start  max-md-xs:justify-center flex-wrap">
+          {savedDataValue
+            .filter((item) => item.itemType == "NOTES")
+            .map((item, index) => (
+              <NotesCard
+                categories={item.itemDetails.categories}
+                key={index}
+                id={item.itemDetails.id}
+                img={item.itemDetails.img}
+                title={item.itemDetails.title}
+                url={item.itemDetails.url}
+              />
+            ))}
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

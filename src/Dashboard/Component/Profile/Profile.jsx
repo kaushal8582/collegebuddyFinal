@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import  { useContext, useEffect, useState } from "react";
 import profilePic from "../../../assets/College Buddy Website/Artboard 1 2.png";
 import graduatioCap from "../../../assets/resources/svgs/GRADUATIONCAP.svg";
 import viewProfileVector from "../../../assets/College Buddy Website/Vector.svg";
 import shareIcon from "../../../assets/College Buddy Website/share-iconICONS.svg";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import myContext from "../../../components/context/myContext";
 
 const Profile = ({data,localData}) => {
@@ -35,8 +35,6 @@ const Profile = ({data,localData}) => {
           tempToday = 6; // Loop back to Sunday if underflow
         }
       }
-      console.log(arr);
-      
     }
 
     setActiveDays(arr);
@@ -102,9 +100,9 @@ const Profile = ({data,localData}) => {
           <h3>Daily Active Streak</h3>
           <div className="flex justify-between w-full px-1">
             {days.map((day, index) => (
-              <div className="flex flex-col items-center">
+              <div  key={index} className="flex flex-col items-center">
                 <div
-                  key={index}
+                 
                   className={`w-6 ml-3 h-6 flex items-center justify-center rounded-lg border ${
                     activeDays.includes(index)
                       ? "bg-green-500"

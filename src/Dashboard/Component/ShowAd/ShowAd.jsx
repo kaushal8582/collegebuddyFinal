@@ -7,7 +7,7 @@ const ShowAd = () => {
         {/* <h1>PLACE FOR AN AUTOMATIC 
         AD IMAGE CARAOUSEL</h1> */}
 
-          <img className='w-full h-full object-cover' src={cardImg} alt="" />
+          <img className='w-full h-full object-cover' rel='preload' src={cardImg} alt="banner img" />
 
 
     </div>

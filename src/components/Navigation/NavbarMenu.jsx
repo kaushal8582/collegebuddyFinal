@@ -23,6 +23,7 @@ const NavbarMenu = ({ closeMenu }) => {
           <Link to={"/"} className='w-full' ><li className="list-none cursor-pointer hover:text-gray-300 pl-3">Home</li></Link>
           <Link to={"/pyq"} className='w-full' ><li className="list-none cursor-pointer hover:text-gray-300">PYQ</li></Link>
          <Link to={"/ebooks"} className='w-full' > <li className="list-none cursor-pointer hover:text-gray-300">Ebook</li></Link>
+         <Link to={"/dashboard"} className='w-full' > <li className="list-none cursor-pointer hover:text-gray-300">Dashboard</li></Link>
         </div>
       </div>
      

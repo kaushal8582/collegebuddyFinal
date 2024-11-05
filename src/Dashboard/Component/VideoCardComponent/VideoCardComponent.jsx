@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import savedIcon from "../../../assets/College Buddy Website/saved-iconICONS.svg";
 import logo from "../../../assets/resources/svgs/college-buddy-logo-01.svg";
+import { BASE_URL } from "../../../../Helper";
+import toast from "react-hot-toast";
+import myContext from "../../../components/context/myContext";
 
-const VideoCardComponent = ({ heading ,url}) => {
+const VideoCardComponent = ({ heading ,url,videoId}) => {
+
+  const context = useContext(myContext);
+  const {savedData} = context;
+
   function getYouTubeID(url) {
     const parsedUrl = new URL(url);
     if (parsedUrl.hostname === "youtu.be") {
@@ -13,6 +20,19 @@ const VideoCardComponent = ({ heading ,url}) => {
   }
 
   const id = getYouTubeID(url);
+
+
+  const handelVideoSaved =async(id)=>{
+    const datavalue = JSON.parse(localStorage.getItem("user"));
+    const userId = datavalue?.data._id;
+    let obj ={
+      heading,
+      url,
+      id,
+    }
+
+    savedData(userId,id,"VIDEO",obj)
+  }
 
   return (
     <div>
@@ -38,7 +58,7 @@ const VideoCardComponent = ({ heading ,url}) => {
             <h1 className="mx-5 text-[20px] font-[600] text-[#1e1e1ebc] leading-6">
               {heading}
             </h1>
-            <div className="min-w-8 flex items-center cursor-pointer justify-center h-8 rounded-full  border">
+            <div onClick={()=> handelVideoSaved(videoId)} className="min-w-8 flex items-center cursor-pointer justify-center h-8 rounded-full  border">
               <img src={savedIcon} alt="" className="h-[60%]" />
             </div>
           </div>

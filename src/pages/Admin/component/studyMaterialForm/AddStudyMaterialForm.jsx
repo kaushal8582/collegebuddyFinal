@@ -13,9 +13,9 @@ const AddStudyMaterialForm = () => {
   const [formData, setFormData] = useState({
     title: "",
     desc: "",
-    university: "",
-    sem: "",
-    materialType: "",
+    university: "RDS COLLEGE",
+    sem: "4",
+    materialType: "PDF",
     materialLink: "",
     studyMaterialThumbnail: null,
   });
@@ -100,7 +100,7 @@ const AddStudyMaterialForm = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-700 p-6">
       <div className="w-full max-w-lg bg-white p-8 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-6 text-center">
-          Add Study Material
+          Add Notes
         </h2>
         <form onSubmit={handleSubmit}>
           {/* Title */}
@@ -128,20 +128,40 @@ const AddStudyMaterialForm = () => {
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="desc"
             >
-              Description
+              Categories
             </label>
-            <textarea
+            {/* <textarea
               id="desc"
               name="desc"
               value={formData.desc}
               onChange={handleChange}
               className="block w-full border border-gray-300 rounded-md p-2"
               placeholder="Description"
-            />
+            /> */}
+
+            <select
+              name="desc"
+              id=""
+              value={formData.desc}
+              onChange={handleChange}
+              className="w-full border-2 text-gray-600 h-10"
+            >
+              <option value="HTML">HTML</option>
+              <option value="CSS">CSS</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="Python">Python</option>
+              <option value="Java">Java</option>
+              <option value="JavaWeb projects">Web projects</option>
+              <option value="C++">C++</option>
+              <option value="Node.js">Node.js</option>
+              <option value="SQL">SQL</option>
+              <option value="DBMS">DBMS</option>
+              <option value="React">React</option>
+            </select>
           </div>
 
           {/* University Name */}
-          <div className="mb-4 w-full">
+          {/* <div className="mb-4 w-full">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="university"
@@ -156,15 +176,15 @@ const AddStudyMaterialForm = () => {
               className="block w-full border border-gray-300 rounded-md p-2"
             >
               <option value="">Select University</option>
-              {allUniversityname.map((item)=>(
+              {allUniversityname.map((item) => (
                 <option value={item.name}>{item.name}</option>
-              ))};
-             
+              ))}
+              ;
             </select>
-          </div>
+          </div> */}
 
           {/* sem */}
-          <div className="mb-4 w-full">
+          {/* <div className="mb-4 w-full">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="sem"
@@ -188,10 +208,10 @@ const AddStudyMaterialForm = () => {
               <option value="7">7th sem</option>
               <option value="8">8th sem</option>
             </select>
-          </div>
+          </div> */}
 
           {/* Material Type */}
-          <div className="mb-4 w-full">
+          {/* <div className="mb-4 w-full">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="materialType"
@@ -210,7 +230,7 @@ const AddStudyMaterialForm = () => {
               <option value="video">Video</option>
               <option value="pdf">PDF</option>
             </select>
-          </div>
+          </div> */}
 
           {/* Material File */}
           <div className="mb-4 w-full">
@@ -218,7 +238,7 @@ const AddStudyMaterialForm = () => {
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="material"
             >
-              Material Link
+              Notes Link
             </label>
             <input
               placeholder="Paste Study material link"
