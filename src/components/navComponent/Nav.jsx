@@ -68,7 +68,7 @@ const Nav = () => {
             <option value={"/pyq"}>PYQs</option>
             <option value={"/ebooks"}>E-Books</option>
             <option value={"/video"}>Videos</option>
-            <option value={"/notes"}>Notes</option>
+            {/* <option value={"/notes"}>Notes</option> */}
           </select>
 
           {

@@ -1,21 +1,32 @@
-
-
-/* Wrapper for maintaining aspect ratio */
 .video-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  max-width: 760px; /* Optional: Limit max width */
+  max-width: 760px;
   margin: 0 auto;
 }
 
-/* Responsive iframe */
+.video-thumbnail {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.video-wrapper.video-playing {
+  padding-top: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  position: relative;
+}
+
 .responsive-iframe {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  border: none;
+  z-index: 10; /* Ensure the iframe is on top */
+  display: block;
 }
 
 

@@ -33,8 +33,7 @@ import UserProfilePage from "./pages/UserProfile/Pages/UserProfilePage.jsx";
 import EditProfile from "./pages/EditProfile/pages/EditProfile.jsx";
 import UploadProject from "./pages/UserProfile/Pages/UploadProject.jsx";
 import NotFoundPage from "./pages/NotFound/NotFoundPage.jsx";
-import SkeletonEffectCard from "./components/skeletonEffect/SkeletonEffectCard.jsx";
-import Notification from "./Dashboard/Pages/Notification.jsx";
+// import Notification from "./Dashboard/Pages/Notification.jsx";
 
 function App() {
   return (
@@ -60,14 +59,14 @@ function App() {
                 </IsTokenExpired>
               }
             />
-            <Route
+            {/* <Route
               path="/notification"
               element={
                 // <IsTokenExpired>
                   <Notification />
                 // </IsTokenExpired>
               }
-            />
+            /> */}
             <Route path="/profile" element={<UserProfilePage />} />
             <Route path="/editprofile" element={<EditProfile />} />
             <Route

@@ -19,6 +19,17 @@ const NotesCard = ({ title, img, categories, url, id }) => {
     savedData(userId, id, "NOTES", obj);
   };
 
+  const handleDownload = async () => {
+    
+    const datavalue = JSON.parse(localStorage.getItem("user"));
+    if(datavalue){
+      window.open(url, "_blank");
+    }else{
+      navigate("/login")
+    }
+ 
+  }
+
   return (
     <div className="w-[350px] p-4 bg-white rounded-[15px] overflow-hidden shadow-lg">
       <img
@@ -35,7 +46,7 @@ const NotesCard = ({ title, img, categories, url, id }) => {
         {categories} <br />
       </h3>
       <div className="flex items-center justify-between mt-2">
-        <a href={url} className="w-[48%]" target="_blank">
+        <a onClick={handleDownload} className="w-[48%]" target="_blank">
           <button className="bg-[#79B058]  text-white font-bold py-2 px-4 w-[100%] rounded focus:outline-none focus:shadow-outline">
             Download
           </button>

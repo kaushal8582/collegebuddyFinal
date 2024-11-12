@@ -23,6 +23,11 @@ const SavedMaterial = () => {
     getAllSavedContent(userId);
   }, []);
 
+  useEffect(()=>{
+    console.log(savedDataValue);
+    
+  },[])
+
 
 
   return (
@@ -55,6 +60,7 @@ const SavedMaterial = () => {
                 courseName={item.itemDetails.courseName}
                 questionLink={item.itemDetails.questionLink}
                 sem={item.itemDetails.semester}
+                img ={item.itemDetails.img}
               />
             ))}
         </div>

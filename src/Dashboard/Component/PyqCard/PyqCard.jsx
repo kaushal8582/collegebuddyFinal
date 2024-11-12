@@ -1,8 +1,6 @@
-import React, { useContext } from "react";
-import bannerImg from "../../../assets/resources/img/pyq-banner 1.png";
-import toast from "react-hot-toast";
-import { BASE_URL } from "../../../../Helper";
+import  { useContext } from "react";
 import myContext from "../../../components/context/myContext";
+import { useNavigate } from "react-router-dom";
 
 const PyqCard = ({
   collegeName,
@@ -12,43 +10,13 @@ const PyqCard = ({
   year,
   questionLink,
   id,
+  img,
 }) => {
   const context = useContext(myContext);
   const { savedData } = context;
+  const navigate  = useNavigate()
 
-  const handleDownload = async () => {
-    try {
-      const datavalue = JSON.parse(localStorage.getItem("user"));
-      const accessToken = datavalue?.accessToken;
-      const response = await fetch(
-        `${BASE_URL}/collegebuddy/api/v1/pyq/downloadpyq/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          method: "POST",
-        }
-      );
-
-      if (response.status == 401) {
-        navigate("/login");
-      }
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-
-      const a = document.createElement("a");
-      a.href = data.data;
-      a.download = `${collegeName}-${sem}th - ${year} pyq.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    } catch (error) {
-      console.log("ebook download error", error);
-    }
-  };
+  
 
   const handelSavedPyq = async (id) => {
     const datavalue = JSON.parse(localStorage.getItem("user"));
@@ -59,16 +27,30 @@ const PyqCard = ({
       year: year,
       courseName: courseName,
       questionLink: questionLink ,
+      img:img
     }
 
     savedData(userId,id,"PYQ",obj)
   };
 
+
+  const handleDownload = async () => {
+    
+    const datavalue = JSON.parse(localStorage.getItem("user"));
+    if(datavalue){
+      window.open(questionLink, "_blank");
+    }else{
+      navigate("/login")
+    }
+ 
+  }
+
+
   return (
     <div className="w-[417px] max-lg-xs:w-[340px] p-4 overflow-hidden flex flex-col gap-4 bg-white rounded-xl ">
       <img
         className="w-full h-[125px] object-cover rounded-xl border-2"
-        src={bannerImg}
+        src={img}
         alt="college banner"
       />
       <h1
@@ -105,9 +87,8 @@ const PyqCard = ({
       </div>
 
       <div className="flex items-center justify-between w-full">
-        <button
-          onClick={handleDownload}
-          className=" w-[48%] bg-[#79B058] text-white py-2 flex items-center justify-center rounded-xl "
+        <a  onClick={handleDownload} target="_blank" className="w-[48%]" ><button
+          className=" w-full bg-[#79B058] text-white py-2 flex items-center justify-center rounded-xl "
         >
           <svg
             width="24"
@@ -126,7 +107,7 @@ const PyqCard = ({
           </svg>
 
           <h3>Download</h3>
-        </button>
+        </button></a>
         <button
           onClick={() => handelSavedPyq(id)}
           className=" w-[48%]  border-2 py-2 flex items-center justify-center rounded-xl "

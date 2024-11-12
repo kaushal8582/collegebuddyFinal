@@ -1,4 +1,3 @@
-import React from 'react';
 import '../../cssss/utility.css';
 import '../../cssss/OurCoursesComponent.css';
 import courseVideo from "../../assets/resources/video/college-buddy-logo-animtion.mp4"
@@ -12,7 +11,7 @@ const OurCoursesComponent = () => {
           Boost Your Academics and Excel in Your Career with <span className="text-green-500 font-normal">Our Courses</span>
         </h1>
         <a href="/dashboard" className="no-underline">
-          <button className="button hoverbtn w-374px border-none text-24px capitalize font-normal">
+          <button className="button  hoverbtn w-[374px] border-none text-24px capitalize font-normal">
             Start Your Success Journey
           </button>
         </a>

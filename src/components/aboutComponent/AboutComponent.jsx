@@ -17,7 +17,7 @@ const AboutComponent = () => {
         Who we <span className="text-green-500 font-normal">are</span> and what we <span className="text-green-500 font-normal">do?</span>
       </h1>
 
-      <div className="video-wrapper">
+      <div className={`video-wrapper ${isVideoPlaying ? 'video-playing' : ''}`}>
         {isVideoPlaying ? (
           <iframe 
             src="https://www.youtube.com/embed/7IOIjb0fPvM?si=2-XVAOaq9NtC8rlc&autoplay=1" 
@@ -30,7 +30,7 @@ const AboutComponent = () => {
           ></iframe>
         ) : (
           <div className="relative cursor-pointer" onClick={handlePlayVideo}>
-            <img src={youtubeImg} alt="YouTube Thumbnail" className="w-full h-full" />
+            <img src={youtubeImg} alt="YouTube Thumbnail" className="video-thumbnail" />
             <div className="absolute inset-0 flex items-center justify-center">
               <img 
                 src="https://yourdomain.com/play-button-icon.png" // Replace with your play button icon path

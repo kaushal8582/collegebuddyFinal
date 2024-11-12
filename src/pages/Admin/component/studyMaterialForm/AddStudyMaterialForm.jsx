@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import toast from "react-hot-toast";
-import { useContext } from "react";
-import myContext from "../../../../components/context/myContext";
+// import { useContext } from "react";
+// import myContext from "../../../../components/context/myContext";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../../../../Helper";
 
 const AddStudyMaterialForm = () => {
-  const context = useContext(myContext);
-  const { allCourseName, allUniversityname } = context;
+  // const context = useContext(myContext);
+  // const { allCourseName, allUniversityname } = context;
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -82,7 +82,7 @@ const AddStudyMaterialForm = () => {
         }
       );
 
-      const data = await response.json();
+      // const data = await response.json();
       if (response.status == 200) {
         toast.success("Study materail add succesfully");
         navigate("/admindashboard");
@@ -146,6 +146,7 @@ const AddStudyMaterialForm = () => {
               onChange={handleChange}
               className="w-full border-2 text-gray-600 h-10"
             >
+              <option value="">select</option>
               <option value="HTML">HTML</option>
               <option value="CSS">CSS</option>
               <option value="JavaScript">JavaScript</option>

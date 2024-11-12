@@ -1,5 +1,5 @@
 // src/components/EbookForm.js
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../../../../Helper';
@@ -105,7 +105,8 @@ const EbookForm = () => {
             value={formData.description}
             onChange={handelInputChange}
           /> */}
-          <select name="description" id="" value={formData.description} onChange={handelInputChange} className='w-full border-2 text-gray-600 h-10' >
+          <select name="description" defaultValue={"HTML"} id="" value={formData.description} onChange={handelInputChange} className='w-full border-2 text-gray-600 h-10' >
+            <option value="">Select</option>
             <option value="HTML">HTML</option>
             <option value="CSS">CSS</option>
             <option value="JavaScript">JavaScript</option>

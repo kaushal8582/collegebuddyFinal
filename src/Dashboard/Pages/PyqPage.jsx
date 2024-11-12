@@ -70,6 +70,10 @@ const PyqPage = () => {
     }
   };
 
+  useEffect(()=>{
+    console.log(allPyq);
+  },[])
+
 
  
 
@@ -164,6 +168,7 @@ const PyqPage = () => {
                     id={pyq._id}
                     year={pyq.year}
                     questionLink={pyq.questionLink}
+                    img ={pyq.img}
                   />
                 </div>
               );
@@ -179,6 +184,7 @@ const PyqPage = () => {
                     id={pyq._id}
                     year={pyq.year}
                     questionLink={pyq.questionLink}
+                    img ={pyq.img}
                   />
                 </div>
               );

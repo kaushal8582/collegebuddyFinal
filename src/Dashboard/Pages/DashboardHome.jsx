@@ -6,16 +6,16 @@ import SavedMaterial from "./SavedMaterial";
 import PyqPage from "../Pages/PyqPage";
 import EbookPage from "../Pages/EbookPage";
 import VideoPage from "../Pages/VideoPage";
-import CoursePage from "../Pages/CoursePage";
+// import CoursePage from "../Pages/CoursePage";
 import NotesPage from "../Pages/NotesPage";
-import LivePage from "../Pages/LiveClassesPage";
+// import LivePage from "../Pages/LiveClassesPage";
 import myContext from "../../components/context/myContext";
 import CommingSoon from "./CommingSoon";
 import SkeletonEffectCard from "../../components/skeletonEffect/SkeletonEffectCard";
 
 const DashboardHome = () => {
   const context = useContext(myContext);
-  const { fetchProfileData, profileData, loader } = context;
+  const { fetchProfileData,  loader } = context;
  
   const [LocalStorageData, setLocalStorageData] = useState();
 

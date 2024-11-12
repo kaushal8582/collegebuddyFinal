@@ -1,5 +1,3 @@
-import React from "react";
-import Nav from "../../components/navComponent/Nav";
 import Layout from "../../components/layout/Layout";
 import HeroSection from "../../components/heroSection/HeroSection";
 import AboutComponent from "../../components/aboutComponent/AboutComponent";

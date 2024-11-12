@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import  { useContext,  useState } from "react";
 import myContext from "../../components/context/myContext";
 import Loader from "../../components/Loader/Loader";
 import EbookCard from "../Component/Ebook/EbookCard";
-import bookImg from "../../assets/College Buddy Website/Frame 190.svg";
+
 
 const EbookPage = () => {
   const context = useContext(myContext);
@@ -23,48 +23,11 @@ const EbookPage = () => {
     "DBMS"
   ];
 
-  let EbookData = [
-    {
-      title: "JavaScript Handbook From Basics to Advanced",
-      img: "",
-      categories: "JavaScript",
-      url: "www.google.com",
-    },
-    {
-      title: "JavaScript",
-      img: "",
-      categories: "JavaScript",
-      url: "www.google.com",
-    },
-    {
-      title: "HTMl or Css Books",
-      img: "",
-      categories: "HTML",
-      url: "www.google.com",
-    },
-    {
-      title: "HTML Books",
-      img: "",
-      categories: "HTML",
-      url: "www.google.com",
-    },
-    {
-      title: "Python Books",
-      img: "",
-      categories: "Python",
-      url: "www.google.com",
-    },
-    {
-      title: "C++",
-      img: "",
-      categories: "C++",
-      url: "www.google.com",
-    },
-  ];
+  
 
   const handleClick = (button) => {
     if (button == "all") {
-      setFilterData(EbookData);
+      setFilterData(allEbook);
     } else {
       let filtData = allEbook.filter((data) => data?.description == button);      
       setFilterData(filtData);

@@ -45,5 +45,8 @@
   .logovideoanimated {
     height: 70vw;
   }
+  #courcleft button{
+    width: 317px;
+  }
   
 }

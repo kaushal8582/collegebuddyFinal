@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import  { useContext } from "react";
 import myContext from "../../components/context/myContext";
-import img from "../../assets/College Buddy Website/Frame 167.png";
 
-import savedIcon from "../../assets/College Buddy Website/saved-iconICONS.svg";
 import VideoCardComponent from "../Component/VideoCardComponent/VideoCardComponent";
 
 const VideoPage = () => {
-  const [activeButton, setActiveButton] = useState("all");
+  // const [activeButton, setActiveButton] = useState("all");
   const context = useContext(myContext);
   const { getAllVideo } = context;
 
@@ -14,24 +12,24 @@ const VideoPage = () => {
   //   console.log(getAllVideo);
   // },[])
 
-  const buttons = [
-    "all",
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "Python",
-    "Web projects",
-    "Java",
-    "C++",
-  ];
+  // const buttons = [
+  //   "all",
+  //   "HTML",
+  //   "CSS",
+  //   "JavaScript",
+  //   "Python",
+  //   "Web projects",
+  //   "Java",
+  //   "C++",
+  // ];
 
-  const handleClick = (button) => {
-    setActiveButton(button);
-  };
+  // const handleClick = (button) => {
+  //   setActiveButton(button);
+  // };
 
   return (
     <div className="" >
-      <div className="bg-white border-b border-t border-gray-400 w-full h-[51px]  pl-[100px] max-lg-xs:pl-6 flex items-center  justify-start gap-3 overflow-x-auto">
+      {/* <div className="bg-white border-b border-t border-gray-400 w-full h-[51px]  pl-[100px] max-lg-xs:pl-6 flex items-center  justify-start gap-3 overflow-x-auto">
         {buttons.map((button, index) => (
           <button
             key={index}
@@ -45,7 +43,7 @@ const VideoPage = () => {
             {button}
           </button>
         ))}
-      </div>
+      </div> */}
 
         <div className="flex gap-3 max-md-xs:pl-0 pl-[100px] pt-[30px] flex-wrap" >
         {getAllVideo?.length > 0 ? (
